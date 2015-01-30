@@ -8,6 +8,10 @@ import com.google.zxing.qrcode.QRCodeWriter;
 import java.nio.file.Paths;
 import java.util.Hashtable;
 
+import org.opencv.core.Core;
+import org.opencv.core.CvType;
+import org.opencv.core.Mat;
+
 /**
  * Created by Mac on 15/1/29.
  */
@@ -27,10 +31,14 @@ public class Main {
 
         if(null != matrix){
             try{
-                MatrixToImageWriter.writeToPath(matrix, "PNG", Paths.get("test.png"));
+                MatrixToImageWriter.writeToPath(matrix, "PNG", Paths.get("result/test.png"));
             }catch (Exception e){
                 e.printStackTrace();
             }
         }
+
+        System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+        Mat m = Mat.eye(3, 3, CvType.CV_8UC1);
+        System.out.println("m = " + m.dump());
     }
 }
