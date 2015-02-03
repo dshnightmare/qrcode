@@ -120,7 +120,12 @@ public final class Encoder {
         int bitsNeeded = headerBits.getSize()
                 + mode.getCharacterCountBits(provisionalVersion)
                 + dataBits.getSize();
-        Version version = chooseVersion(bitsNeeded, ecLevel);
+        Version version;
+        Integer num;
+        if(hints != null && (num = (Integer)hints.get(EncodeHintType.QR_VERSION)) != null)
+            version = Version.getVersionForNumber(num);
+        else
+            version = chooseVersion(bitsNeeded, ecLevel);
 
         BitArray headerAndDataBits = new BitArray();
         headerAndDataBits.appendBitArray(headerBits);

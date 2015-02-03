@@ -482,4 +482,44 @@ final class MatrixUtil {
         }
     }
 
+    // finalBit -> Matrix(x, y)
+    static void buildDataBitsIndex(int dataSize, ByteMatrix matrix, int[] locX, int[] locY)
+            throws WriterException {
+        int bitIndex = 0;
+        int direction = -1;
+        // Start from the right bottom cell.
+        int x = matrix.getWidth() - 1;
+        int y = matrix.getHeight() - 1;
+        while (x > 0) {
+            // Skip the vertical timing pattern.
+            if (x == 6) {
+                x -= 1;
+            }
+            while (y >= 0 && y < matrix.getHeight()) {
+                for (int i = 0; i < 2; ++i) {
+                    int xx = x - i;
+                    // Skip the cell if it's not empty.
+                    if (!isEmpty(matrix.get(xx, y))) {
+                        continue;
+                    }
+                    if (bitIndex < dataSize) {
+                        locX[bitIndex] = xx;
+                        locY[bitIndex] = y;
+                        ++bitIndex;
+                    } else {
+
+                    }
+                }
+                y += direction;
+            }
+            direction = -direction;  // Reverse the direction.
+            y += direction;
+            x -= 2;  // Move to the left.
+        }
+        // All bits should be consumed.
+        if (bitIndex != dataSize) {
+            throw new WriterException("Not all bits consumed: " + bitIndex + '/' + dataSize);
+        }
+    }
+
 }

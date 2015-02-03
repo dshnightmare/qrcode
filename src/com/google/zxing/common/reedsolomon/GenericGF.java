@@ -38,8 +38,8 @@ public final class GenericGF {
   public static final GenericGF AZTEC_DATA_8 = DATA_MATRIX_FIELD_256;
   public static final GenericGF MAXICODE_FIELD_64 = AZTEC_DATA_6;
 
-  private final int[] expTable;
-  private final int[] logTable;
+  public final int[] expTable;
+  public final int[] logTable;
   private final GenericGFPoly zero;
   private final GenericGFPoly one;
   private final int size;
