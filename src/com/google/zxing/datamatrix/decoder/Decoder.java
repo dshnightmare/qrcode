@@ -25,7 +25,7 @@ import com.google.zxing.common.reedsolomon.ReedSolomonDecoder;
 import com.google.zxing.common.reedsolomon.ReedSolomonException;
 
 /**
- * <p>The main class which implements Data Matrix Code decoding -- as opposed to locating and extracting
+ * <p>The com.google.zxing.main class which implements Data Matrix Code decoding -- as opposed to locating and extracting
  * the Data Matrix Code from an image.</p>
  *
  * @author bbrown@google.com (Brian Brown)

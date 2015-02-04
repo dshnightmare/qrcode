@@ -28,7 +28,7 @@ import com.google.zxing.common.reedsolomon.ReedSolomonException;
 import java.util.Map;
 
 /**
- * <p>The main class which implements MaxiCode decoding -- as opposed to locating and extracting
+ * <p>The com.google.zxing.main class which implements MaxiCode decoding -- as opposed to locating and extracting
  * the MaxiCode from an image.</p>
  *
  * @author Manuel Kasten

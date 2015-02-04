@@ -8,7 +8,7 @@ import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import com.google.zxing.qrcode.decoder.Mode;
 import com.google.zxing.qrcode.decoder.Version;
 import com.google.zxing.qrcode.detector.Detector;
-import main.BufferedImageLuminanceSource;
+import com.google.zxing.main.BufferedImageLuminanceSource;
 import org.opencv.core.*;
 import org.opencv.highgui.Highgui;
 import org.opencv.imgproc.Imgproc;
@@ -101,8 +101,8 @@ public class QRCodeBeautify{
         // (With ECI in place,) Write the mode marker
         appendModeInfo(mode, headerBits);
 
-        // Collect data within the main segment, separately, to count its size if needed. Don't add it to
-        // main payload yet.
+        // Collect data within the com.google.zxing.main segment, separately, to count its size if needed. Don't add it to
+        // com.google.zxing.main payload yet.
         BitArray dataBits = new BitArray();
         appendBytes(content, mode, dataBits, encoding);
 
@@ -192,8 +192,8 @@ public class QRCodeBeautify{
         // (With ECI in place,) Write the mode marker
         appendModeInfo(mode, headerBits);
 
-        // Collect data within the main segment, separately, to count its size if needed. Don't add it to
-        // main payload yet.
+        // Collect data within the com.google.zxing.main segment, separately, to count its size if needed. Don't add it to
+        // com.google.zxing.main payload yet.
         BitArray dataBits = new BitArray();
         appendBytes(content, mode, dataBits, encoding);
 
@@ -223,7 +223,7 @@ public class QRCodeBeautify{
         // finalData = interleave data
         BitArray headerAndDataBits = new BitArray();
         headerAndDataBits.appendBitArray(headerBits);
-        // Find "length" of main segment and write it
+        // Find "length" of com.google.zxing.main segment and write it
         int numLetters = mode == Mode.BYTE ? dataBits.getSizeInBytes() : content.length();
         appendLengthInfo(numLetters, version, mode, headerAndDataBits);
         // Put data together into the overall payload
@@ -309,7 +309,7 @@ public class QRCodeBeautify{
             else {
                 for (int j = 0; j < moduleSize; j++) {
                     for (int k = 0; k < moduleSize; k++) {
-                        int IndexI = x[i] * moduleSize + j, IndexJ = y[i] * moduleSize + k;
+                        int IndexI = x[mDataToFinalData[i]] * moduleSize + j, IndexJ = y[mDataToFinalData[i]] * moduleSize + k;
                         allBits[i].mImportanceValue += (pEdge * edge.get(IndexI, IndexJ)[0]) / 255;
                     }
                 }
@@ -900,7 +900,7 @@ public class QRCodeBeautify{
 
         // map the rs
         for (int i = 0; i < maxNumEcBytes; ++i) {
-            for (int j = 0; j < numRSBlocks; j++) {
+            for (int j = 0; j < numRSBlocks; ++j) {
                 if (i < blockRSLength[j]) {
                     for(int k = 0; k < 8; k++){
                         mFinalDataToData[count] = (numDataBytes + rsOffset[j] + i) * 8 + k;
@@ -926,7 +926,7 @@ public class QRCodeBeautify{
         return detectorResult.getBits();
     }
 
-    private void getRevMapFromMap(int[] map, int[] rev){
+    private void getRevMapFromMap (int[] map, int[] rev) throws WriterException{
         //ensure the map is a permutation
         class Permute{
             int index;
@@ -948,6 +948,8 @@ public class QRCodeBeautify{
             }
         });
         for(int i = 0; i < map.length; i++){
+            if(a[i].map != i)
+                throw new WriterException("getRevMapFromMap: map is not a permutation");
             rev[i] = a[i].index;
         }
     }

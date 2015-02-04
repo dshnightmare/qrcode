@@ -28,7 +28,7 @@ import com.google.zxing.common.reedsolomon.ReedSolomonException;
 import java.util.Map;
 
 /**
- * <p>The main class which implements QR Code decoding -- as opposed to locating and extracting
+ * <p>The com.google.zxing.main class which implements QR Code decoding -- as opposed to locating and extracting
  * the QR Code from an image.</p>
  *
  * @author Sean Owen
