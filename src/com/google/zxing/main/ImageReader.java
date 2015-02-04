@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package main;
+package com.google.zxing.main;
 
 import javax.imageio.ImageIO;
 import javax.xml.bind.DatatypeConverter;

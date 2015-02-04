@@ -27,7 +27,7 @@ import com.google.zxing.common.reedsolomon.ReedSolomonException;
 import java.util.Arrays;
 
 /**
- * <p>The main class which implements Aztec Code decoding -- as opposed to locating and extracting
+ * <p>The com.google.zxing.main class which implements Aztec Code decoding -- as opposed to locating and extracting
  * the Aztec Code from an image.</p>
  *
  * @author David Olivier

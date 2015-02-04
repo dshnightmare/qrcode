@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package main;
+package com.google.zxing.main;
 
 import com.google.zxing.BinaryBitmap;
 import com.google.zxing.LuminanceSource;
